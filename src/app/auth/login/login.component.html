@@ -1,0 +1,17 @@
+<div class="login-container">
+  <h2 class="login-title">
+    請選擇登入方式
+  </h2>
+  <div class="login-identify-list">
+    <div class="login-identify-item" [ngClass]="item.className" *ngFor="let item of identifyList"
+      (click)="onIdentifyLogin(item.id)">
+      <ng-container *ngIf="item.icon; else useImg">
+        <mat-icon class="identify-item-icon">{{item.icon}}</mat-icon>
+      </ng-container>
+      <ng-template #useImg>
+        <img class="identify-item-icon" [src]="item.img" [alt]="item.className + ' identify'" />
+      </ng-template>
+      <div class="identify-item-wording">{{item.name}}</div>
+    </div>
+  </div>
+</div>

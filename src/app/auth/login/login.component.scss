@@ -1,0 +1,70 @@
+@import 'variable';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.login-container {
+  width: 300px;
+  text-align: center;
+
+  .login-title {
+    margin: 0;
+    letter-spacing: 3px;
+  }
+
+  .login-identify-list {
+    margin-top: $m-16;
+
+    .login-identify-item {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      color: #fff;
+      padding: 0 $p-40;
+      cursor: pointer;
+
+      &+* {
+        margin-top: $m-32;
+      }
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      .identify-item-icon {
+        width: 40px;
+        height: 40px;
+      }
+
+      .identify-item-wording {
+        margin-left: $m-16;
+      }
+
+      &.fb {
+        background: #4267B2;
+
+      }
+
+      &.google {
+        background: #4285F4;
+
+        .identify-item-icon {
+          transform: scale(0.8);
+        }
+      }
+
+      &.other {
+        background: #00BCD4;
+
+        .identify-item-icon {
+          font-size: 40px;
+          line-height: 40px;
+        }
+      }
+    }
+  }
+}

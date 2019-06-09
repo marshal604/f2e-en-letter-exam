@@ -1,0 +1,24 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: gray;
+}
+
+// reset css
+ul {
+  margin: 0;
+  padding: 0;
+
+  li {
+    list-style: none;
+  }
+}
+
+* {
+  outline: none;
+}
+
+
+.underline-hover {
+  @include underline-hover;
+}
