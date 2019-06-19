@@ -16,7 +16,8 @@
       "@shared/*": ["src/app/shared/*"],
       "@core/*": ["src/app/core/*"],
       "@gql-models/*": ["src/app/gql-models/*"],
-      "@env/*": ["src/environments/*"]
+      "@env/*": ["src/environments/*"],
+      "@exam/*": ["src/app/exam/*"]
     },
     "typeRoots": [
       "node_modules/@types"
