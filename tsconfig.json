@@ -13,7 +13,10 @@
     "target": "es5",
     "paths": {
       "@auth/*": ["src/app/auth/*"],
-      "@shared/*": ["src/app/shared/*"]
+      "@shared/*": ["src/app/shared/*"],
+      "@core/*": ["src/app/core/*"],
+      "@gql-models/*": ["src/app/gql-models/*"],
+      "@env/*": ["src/environments/*"]
     },
     "typeRoots": [
       "node_modules/@types"

@@ -17,14 +17,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/english-letter-exam",
+            "outputPath": "dist/en-letter-exam",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "baseHref": "/",
             "assets": [
-              "src/favicon.ico",
+              "src/helloyur.ico",
               "src/assets"
             ],
             "styles": [
@@ -57,7 +57,7 @@
                 "maximumError": "5mb"
               }]
             },
-            "github": {
+            "deploy": {
               "fileReplacements": [{
                 "replace": "src/environments/environment.ts",
                 "with": "src/environments/environment.prod.ts"
@@ -84,7 +84,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "english-letter-exam:build"
+            "browserTarget": "english-letter-exam:build",
+            "proxyConfig": "src/proxy/proxy.config.json"
           },
           "configurations": {
             "production": {
@@ -110,7 +111,7 @@
             ],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
+              "src/helloyur.ico",
               "src/assets"
             ]
           }
