@@ -1,0 +1,35 @@
+@import 'variable';
+
+:host {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+}
+
+.exam-home-container {
+  height: 100%;
+  max-height: 450px;
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: $p-16;
+  box-sizing: border-box;
+}
+
+.config-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exam-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.exam-button {
+  text-align: center;
+}

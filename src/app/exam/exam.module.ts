@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 
-import { ExamComponent } from './exam.component';
 import { SharedModule } from '@shared/shared.module';
-import { ExamRoutingModule } from './exam-routing.module';
+import { ExamComponent } from '@exam/exam.component';
+import { ExamRoutingModule } from '@exam/exam-routing.module';
+import { ExamHomeComponent } from '@exam/exam-home/exam-home.component';
 
 @NgModule({
   imports: [SharedModule, ExamRoutingModule],
-  declarations: [ExamComponent]
+  declarations: [ExamComponent, ExamHomeComponent]
 })
 export class ExamModule {}
