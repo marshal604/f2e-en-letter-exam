@@ -11,7 +11,8 @@
     "build": "ng build --configuration=deploy",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "substree:model": "GIT_SSL_NO_VERIFY=true git subtree pull --prefix src/app/gql-models gql-models master --squash"
   },
   "private": true,
   "dependencies": {
