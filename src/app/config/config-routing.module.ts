@@ -9,7 +9,10 @@ const routes: Routes = [
   {
     path: '',
     component: ConfigComponent,
-    children: [{ path: 'list', component: ConfigListComponent }]
+    children: [
+      { path: 'list', component: ConfigListComponent },
+      { path: 'exam', loadChildren: '@config/exam-config/exam-config.module.ts#ExamConfigModule' }
+    ]
   }
 ];
 @NgModule({
