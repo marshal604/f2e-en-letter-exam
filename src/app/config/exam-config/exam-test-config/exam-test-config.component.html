@@ -1,0 +1,18 @@
+<mat-horizontal-stepper [selectedIndex]="stepIndex" [linear]="true" #stepper [formGroup]="examForm">
+  <mat-step [stepControl]="examForm.get('examQuestion')">
+    <yur-exam-test-question-input formControlName="examQuestion">
+    </yur-exam-test-question-input>
+    <div class="buttons">
+      <span></span>
+      <button mat-raised-button color="primary" [disabled]="examForm.get('examQuestion').invalid"
+        matStepperNext>Next</button>
+    </div>
+  </mat-step>
+  <mat-step [stepControl]="examForm.get('examConfig')">
+    <yur-exam-test-config-input formControlName="examConfig"></yur-exam-test-config-input>
+    <div class="buttons">
+      <button mat-raised-button color="accent" matStepperPrevious>Prev</button>
+      <button mat-raised-button color="primary" [disabled]="examForm.invalid" (click)="onSave()">Save</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

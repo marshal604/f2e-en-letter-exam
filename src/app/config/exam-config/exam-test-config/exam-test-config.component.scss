@@ -1,0 +1,14 @@
+@import 'variable';
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $p-56 0 $p-24;
+  margin-top: $m-24;
+}
+
+yur-exam-test-question-input,
+yur-exam-test-config-input {
+  padding-right: $p-56;
+}

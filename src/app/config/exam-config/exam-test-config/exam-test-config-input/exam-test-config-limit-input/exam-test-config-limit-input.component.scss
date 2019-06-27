@@ -1,0 +1,11 @@
+@import 'variable';
+
+.mat-radio-group {
+  *+.mat-radio-button {
+    margin-top: $m-12;
+  }
+
+  .limit-input {
+    margin-left: $m-24;
+  }
+}

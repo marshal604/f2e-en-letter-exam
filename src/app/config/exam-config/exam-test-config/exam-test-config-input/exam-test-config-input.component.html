@@ -1,0 +1,22 @@
+<ng-container [formGroup]="examTestConfigForm">
+  <div class="block" *ngFor="let examTestConfigItem of examTestConfigList">
+    <div class="label">{{examTestConfigItem.label}}</div>
+    <div class="input">
+      <ng-container [ngSwitch]="examTestConfigItem.inputType">
+        <yur-exam-test-config-limit-input *ngSwitchCase="examTestConfigLimitType"
+          [formControlName]="examTestConfigItem.formControlName" [unit]="examTestConfigItem.unit">
+        </yur-exam-test-config-limit-input>
+        <mat-form-field *ngSwitchCase="examTestConfigSelectType">
+          <mat-select [formControlName]="examTestConfigItem.formControlName">
+            <mat-option [value]="value.id" *ngFor="let value of examTestConfigItem.value">
+              {{value.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-radio-group *ngSwitchCase="examTestConfigRadioType" [formControlName]="examTestConfigItem.formControlName">
+          <mat-radio-button [value]="value.id" *ngFor="let value of examTestConfigItem.value">{{value.name}}
+          </mat-radio-button>
+        </mat-radio-group>
+      </ng-container>
+    </div>
+  </div>
+</ng-container>

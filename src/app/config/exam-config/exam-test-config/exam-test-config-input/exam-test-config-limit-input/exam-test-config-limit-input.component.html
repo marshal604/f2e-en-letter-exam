@@ -1,0 +1,12 @@
+<ng-container [formGroup]="limitForm">
+  <mat-radio-group formControlName="limit">
+    <mat-radio-button [value]="limitType">限制</mat-radio-button>
+    <div class="limit-input">
+      <mat-form-field *ngIf="isSelectedLimit()">
+        <input type="number" min="0" formControlName="limitNumber" matInput>
+      </mat-form-field>
+      <span>{{this.unitMap.get(this.unit)}}</span>
+    </div>
+    <mat-radio-button [value]="umlimitType">不限</mat-radio-button>
+  </mat-radio-group>
+</ng-container>
