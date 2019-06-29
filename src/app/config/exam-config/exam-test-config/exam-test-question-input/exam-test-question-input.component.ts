@@ -48,7 +48,9 @@ export class ExamTestQuestionInputComponent
 
   initFormGroup() {
     this.examQuestionForm = this.fb.group({
-      question: ['', Validators.required]
+      id: '0',
+      name: ['', Validators.required],
+      question: ['', [Validators.required, this.questionValidators]]
     });
   }
 
@@ -69,6 +71,14 @@ export class ExamTestQuestionInputComponent
 
   setDisabledState(isDisabled: boolean) {
     isDisabled ? this.examQuestionForm.disable() : this.examQuestionForm.enable();
+  }
+
+  questionValidators(control: AbstractControl): ValidationErrors {
+    // english = 中文
+    const regExp = new RegExp(/(\w+\s*)+=(\s*\S+)+/);
+    let isValid = true;
+    control.value.split('\n').forEach(val => (isValid = regExp.test(val)));
+    return isValid ? null : { valid: false, message: 'Exam Test Question fields are invalid.' };
   }
 
   validate(): ValidationErrors {

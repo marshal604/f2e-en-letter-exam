@@ -1,5 +1,22 @@
-.mat-form-field {
+@import 'variable';
+
+:host {
+  display: block;
   width: 85%;
+}
+
+.question-input-sample {
+  font-size: $f-sm;
+  background: rgba(0, 0, 0, 0.1);
+  padding: $p-4 $p-8;
+
+  *+div {
+    margin-top: $m-8;
+  }
+}
+
+.question {
+  width: 100%;
 
   textarea {
     resize: none;
