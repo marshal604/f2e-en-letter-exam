@@ -1,0 +1,33 @@
+@import 'variable';
+
+:host {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 30px 0;
+}
+
+.mat-radio-group {
+  .mat-radio-button {
+    display: block;
+
+    &+* {
+      margin-top: $m-8;
+    }
+  }
+}
+
+.block {
+  min-width: 220px;
+}
+
+.input {
+  margin-top: $m-8;
+  margin-left: $m-20;
+}
+
+@media screen and (min-width: 700px) {
+  :host {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 120px 0;
+  }
+}

@@ -1,0 +1,13 @@
+<ng-container [formGroup]="examQuestionForm">
+  <mat-form-field>
+    <input formControlName="name" matInput placeholder="name">
+  </mat-form-field>
+  <div class="question-input-sample">
+    <div>Sample:</div>
+    <div>apple = 蘋果</div>
+    <div>watermelon = 西瓜</div>
+  </div>
+  <mat-form-field class="question">
+    <textarea formControlName="question" rows="15" matInput placeholder="write your exam content"></textarea>
+  </mat-form-field>
+</ng-container>

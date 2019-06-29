@@ -1,0 +1,7 @@
+<div class="config-container">
+  <div class="config-list">
+    <div class="config-item" *ngFor="let item of configList" (click)="onNavigateTo(item.id)">
+      <div class="name">{{item.name}}</div>
+    </div>
+  </div>
+</div>

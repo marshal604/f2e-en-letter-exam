@@ -1,0 +1,38 @@
+@import 'variable';
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.config-container {
+  width: 300px;
+  text-align: center;
+
+
+  .config-list {
+    margin-top: $m-32;
+
+    .config-item {
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      letter-spacing: 4px;
+      color: #fff;
+      padding: 0 $p-40;
+      cursor: pointer;
+      background: #00BCD4;
+
+      &+* {
+        margin-top: $m-32;
+      }
+
+      &:hover {
+        opacity: 0.9;
+      }
+    }
+  }
+}

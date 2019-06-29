@@ -17,7 +17,8 @@
       "@core/*": ["src/app/core/*"],
       "@gql-models/*": ["src/app/gql-models/*"],
       "@env/*": ["src/environments/*"],
-      "@exam/*": ["src/app/exam/*"]
+      "@exam/*": ["src/app/exam/*"],
+      "@config/*": ["src/app/config/*"]
     },
     "typeRoots": [
       "node_modules/@types"
