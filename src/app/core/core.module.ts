@@ -7,7 +7,7 @@ import { environment } from '@env/environment';
 
 const uri = environment.production
   ? 'https://english-letter-exam.herokuapp.com/graphql'
-  : 'http://localhost:3000/graphql'; // <-- add the URL of the GraphQL server here
+  : 'http://localhost:7777/graphql'; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink) {
   return {
     link: httpLink.create({ uri }),
