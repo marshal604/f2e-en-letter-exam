@@ -8,8 +8,8 @@ export enum InputUnit {
 }
 
 export enum LimitType {
-  umlimit,
-  limit
+  unlimit = -1,
+  limit = 1
 }
 
 export enum QuestionType {
@@ -29,4 +29,17 @@ export enum ExamTestConfigInputType {
   Radio = 1,
   Select,
   Limit
+}
+
+export interface ExamTestConfigInput {
+  examTime: ExamTestConfigLimitInput;
+  examQuestionDisplayCount: ExamTestConfigLimitInput;
+  examQuestionType: QuestionType;
+  examPassScore: ExamTestConfigLimitInput;
+  examAllowCount: ExamTestConfigLimitInput;
+}
+
+export interface ExamTestConfigLimitInput {
+  limit: LimitType;
+  limitNumber: number;
 }

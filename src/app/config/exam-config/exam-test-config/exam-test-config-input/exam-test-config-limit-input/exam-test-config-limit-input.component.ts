@@ -51,8 +51,8 @@ export class ExamTestConfigLimitInputComponent
     return LimitType.limit;
   }
 
-  get umlimitType(): number {
-    return LimitType.umlimit;
+  get unlimitType(): number {
+    return LimitType.unlimit;
   }
 
   ngOnInit() {
