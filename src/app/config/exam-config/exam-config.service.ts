@@ -37,12 +37,12 @@ export class ExamConfigService {
       );
   }
 
-  queryExamQuestionItem(request: GetExamQuestionItemRequest): Observable<ExamQuestionBankInfo> {
+  queryExamQuestionItem(req: GetExamQuestionItemRequest): Observable<ExamQuestionBankInfo> {
     return this.apolloService
       .getApollo()
       .query<{ GetExamQuestionItem: ExamQuestionBankInfo }>({
         query: QUERY_EXAM_QUESTION_ITEM,
-        variables: { request }
+        variables: { req }
       })
       .pipe(
         map(({ data }) => data.GetExamQuestionItem),
@@ -50,12 +50,12 @@ export class ExamConfigService {
       );
   }
 
-  createExamQuestion(request: CreateExamQuestionRequest): Observable<ExamQuestionID> {
+  createExamQuestion(req: CreateExamQuestionRequest): Observable<ExamQuestionID> {
     return this.apolloService
       .getApollo()
       .mutate<{ CreateExamQuestion: ExamQuestionID }>({
         mutation: CREATE_EXAM_QUESTION,
-        variables: { request }
+        variables: { req }
       })
       .pipe(
         map(({ data }) => data.CreateExamQuestion),
@@ -63,12 +63,12 @@ export class ExamConfigService {
       );
   }
 
-  updateExamQuestion(request: UpdateExamQuestionRequest): Observable<ExamQuestionID> {
+  updateExamQuestion(req: UpdateExamQuestionRequest): Observable<ExamQuestionID> {
     return this.apolloService
       .getApollo()
       .mutate<{ UpdateExamQuestion: ExamQuestionID }>({
         mutation: UPDATE_EXAM_QUESTION,
-        variables: { request }
+        variables: { req }
       })
       .pipe(
         map(({ data }) => data.UpdateExamQuestion),
@@ -76,12 +76,12 @@ export class ExamConfigService {
       );
   }
 
-  deleteExamQuestion(request: DeleteExamQuestionRequest): Observable<ExamQuestionID> {
+  deleteExamQuestion(req: DeleteExamQuestionRequest): Observable<ExamQuestionID> {
     return this.apolloService
       .getApollo()
       .mutate<{ DeleteExamQuestion: ExamQuestionID }>({
         mutation: DELETE_EXAM_QUESTION,
-        variables: { request }
+        variables: { req }
       })
       .pipe(
         map(({ data }) => data.DeleteExamQuestion),
