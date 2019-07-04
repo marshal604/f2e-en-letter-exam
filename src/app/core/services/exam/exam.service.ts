@@ -17,12 +17,12 @@ import {
   CREATE_EXAM_QUESTION,
   UPDATE_EXAM_QUESTION,
   DELETE_EXAM_QUESTION
-} from './exam-config.graphql';
+} from './exam.graphql';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ExamConfigService {
+export class ExamService {
   constructor(private apolloService: ApolloService) {}
 
   queryExamQuestionList(): Observable<ExamQuestionBankInfo[]> {
