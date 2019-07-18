@@ -31,7 +31,7 @@ export class ExamHomeComponent implements OnInit, OnDestroy {
   }
 
   onStartExam() {
-    // this.router.navigate([`exam/classroom/${this.examFormControl.value}`]);
+    this.router.navigate([`exam/classroom/${this.examFormControl.value}`]);
   }
 
   private queryExamQuestionList(): Observable<ExamQuestionBankInfo[]> {

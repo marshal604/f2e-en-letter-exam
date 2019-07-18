@@ -54,9 +54,7 @@ export class ExamTestConfigComponent implements OnInit {
   private parseExamSetting(config: ExamTestConfigInput): ExamSetting {
     return {
       examTime: config.examTime.limit ? config.examTime.limitNumber : LimitType.unlimit,
-      examQuestionDisplayCount: config.examQuestionDisplayCount.limit
-        ? config.examQuestionDisplayCount.limitNumber
-        : LimitType.unlimit,
+      examQuestionDisplayCount: config.examQuestionDisplayCount,
       examQuestionType: config.examQuestionType,
       examPassScore: config.examPassScore.limit
         ? config.examPassScore.limitNumber

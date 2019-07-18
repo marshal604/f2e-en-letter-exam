@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ApolloService } from '@core/services/apollo.service';
@@ -37,7 +37,7 @@ export class ExamService {
       );
   }
 
-  queryExamQuestionItem(req: GetExamQuestionItemRequest): Observable<ExamQuestionBankInfo> {
+  queryExamQuestionItem(req: GetExamQuestionItemRequest): Promise<ExamQuestionBankInfo> {
     return this.apolloService
       .getApollo()
       .query<{ GetExamQuestionItem: ExamQuestionBankInfo }>({
@@ -46,8 +46,9 @@ export class ExamService {
       })
       .pipe(
         map(({ data }) => data.GetExamQuestionItem),
-        catchError(() => of(null))
-      );
+        catchError(err => throwError(err))
+      )
+      .toPromise();
   }
 
   createExamQuestion(req: CreateExamQuestionRequest): Observable<ExamQuestionID> {

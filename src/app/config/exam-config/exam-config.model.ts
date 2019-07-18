@@ -33,7 +33,7 @@ export enum ExamTestConfigInputType {
 
 export interface ExamTestConfigInput {
   examTime: ExamTestConfigLimitInput;
-  examQuestionDisplayCount: ExamTestConfigLimitInput;
+  examQuestionDisplayCount: number;
   examQuestionType: QuestionType;
   examPassScore: ExamTestConfigLimitInput;
   examAllowCount: ExamTestConfigLimitInput;
