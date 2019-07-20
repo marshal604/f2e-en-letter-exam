@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
-import { ExamConfigService } from '@config/exam-config/exam-config.service';
+import { ExamService } from '@core/services/exam/exam.service';
 import { ExamTestConfigInput, LimitType } from '@config/exam-config/exam-config.model';
 import { CreateExamQuestionRequest, ExamQuestion, ExamSetting } from '@gql-models/exam/exam.model';
 
@@ -13,7 +13,7 @@ import { CreateExamQuestionRequest, ExamQuestion, ExamSetting } from '@gql-model
 export class ExamTestConfigComponent implements OnInit {
   examForm: FormGroup;
   stepIndex = 0;
-  constructor(private fb: FormBuilder, private examConfigService: ExamConfigService) {}
+  constructor(private fb: FormBuilder, private examService: ExamService) {}
 
   ngOnInit() {
     this.initExamFormGroup();
@@ -35,8 +35,7 @@ export class ExamTestConfigComponent implements OnInit {
       setting: this.parseExamSetting(examConfig),
       question: this.parseExamQuestion(examQuestion.question)
     };
-    console.log('req', req);
-    this.examConfigService.createExamQuestion(req).toPromise();
+    this.examService.createExamQuestion(req).toPromise();
   }
 
   private parseExamQuestion(question: string): ExamQuestion {
@@ -55,9 +54,7 @@ export class ExamTestConfigComponent implements OnInit {
   private parseExamSetting(config: ExamTestConfigInput): ExamSetting {
     return {
       examTime: config.examTime.limit ? config.examTime.limitNumber : LimitType.unlimit,
-      examQuestionDisplayCount: config.examQuestionDisplayCount.limit
-        ? config.examQuestionDisplayCount.limitNumber
-        : LimitType.unlimit,
+      examQuestionDisplayCount: config.examQuestionDisplayCount,
       examQuestionType: config.examQuestionType,
       examPassScore: config.examPassScore.limit
         ? config.examPassScore.limitNumber

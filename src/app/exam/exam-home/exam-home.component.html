@@ -5,12 +5,12 @@
   </div>
   <div class="exam-option">
     <mat-form-field>
-      <mat-select value="test" placeholder="選擇要作答的題庫">
-        <mat-option value="test">test</mat-option>
+      <mat-select [formControl]="examFormControl" placeholder="選擇要作答的題庫">
+        <mat-option [value]="option.id" *ngFor="let option of examQuestionOptions">{{option.name}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
   <div class="exam-button">
-    <button mat-raised-button color="primary">開始作答</button>
+    <button mat-raised-button color="primary" (click)="onStartExam()">開始作答</button>
   </div>
 </div>

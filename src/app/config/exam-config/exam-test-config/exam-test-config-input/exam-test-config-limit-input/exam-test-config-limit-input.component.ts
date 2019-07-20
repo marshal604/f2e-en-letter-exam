@@ -65,7 +65,7 @@ export class ExamTestConfigLimitInputComponent
 
   initLimitForm() {
     this.limitForm = this.fb.group({
-      limit: [LimitType.limit, Validators.required],
+      limit: [LimitType.unlimit, Validators.required],
       limitNumber: [0, Validators.min(0)]
     });
   }

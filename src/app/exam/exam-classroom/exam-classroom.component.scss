@@ -1,0 +1,60 @@
+@import 'variable';
+
+.title {
+    text-align: center;
+
+    >span+span {
+        margin-left: $m-12;
+    }
+}
+
+.content {
+    h2 {
+        text-align: center;
+
+        .mat-radio-button {
+            .question-item {
+                display: inline-block;
+                padding: $p-8 $p-16;
+                min-width: 200px;
+                border-radius: 4px;
+                border: 1px solid;
+                cursor: pointer;
+                transition: all 0.5s;
+
+                &:hover {
+                    background: rgba(gray, 0.2);
+                    transform: scale(1.1);
+                }
+            }
+
+            &.mat-radio-checked {
+                .question-item {
+                    transform: scale(1.1);
+                    background: rgba(gray, 0.2);
+                }
+            }
+        }
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 450px;
+    margin: auto;
+
+    &.one-btn {
+        justify-content: flex-end;
+    }
+}
+
+::ng-deep {
+    yur-exam-classroom {
+
+        .mat-step-header,
+        .mat-radio-container {
+            display: none;
+        }
+    }
+}

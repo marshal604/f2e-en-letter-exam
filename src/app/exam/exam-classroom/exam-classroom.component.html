@@ -1,0 +1,25 @@
+<mat-horizontal-stepper [selectedIndex]="selectedIndex" [linear]="true" [formGroup]="formGroup">
+  <mat-step *ngFor="let questionItem of questionList;let optionIndex = index"
+    [stepControl]="formGroup.get('radio-'+optionIndex)">
+    <h1 class="title">
+      <span>Q{{optionIndex + 1}}.</span>
+      <span>{{questionItem.title}}</span>
+    </h1>
+    <div class="content">
+      <mat-radio-group [formControlName]="'radio-'+ optionIndex">
+        <h2 *ngFor="let question of questionItem.questions; let questionIndex = index">
+          <mat-radio-button [value]="questionIndex">
+            <div class="question-item">{{question}}</div>
+          </mat-radio-button>
+        </h2>
+      </mat-radio-group>
+    </div>
+    <div class="buttons" [class.one-btn]="optionIndex === 0">
+      <button mat-raised-button *ngIf="optionIndex > 0" matStepperPrevious>Prev</button>
+      <button mat-raised-button *ngIf="optionIndex !== questionList.length - 1"
+        [disabled]="formGroup.get('radio-'+optionIndex).invalid" matStepperNext>Next</button>
+      <button mat-raised-button *ngIf="optionIndex === questionList.length - 1"
+        [disabled]="formGroup.invalid || isDisabledSubmit" (click)="onSubmit()">Submit</button>
+    </div>
+  </mat-step>
+</mat-horizontal-stepper>

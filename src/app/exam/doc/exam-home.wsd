@@ -1,0 +1,9 @@
+' select question bank
+@startuml
+Actor User
+User -> ExamHomePage: prepare to select exam question bank
+ExamHomePage -> Backend: query question bank list
+User -> ExamHomePage: selected the one of question bank
+User -> ExamHomePage: click start exam
+ExamHomePage-> ExamClassroomPage: redirect exam classroom page
+@enduml

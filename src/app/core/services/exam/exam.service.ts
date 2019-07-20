@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
 import { ApolloService } from '@core/services/apollo.service';
@@ -16,13 +16,15 @@ import {
   QUERY_EXAM_QUESTION_ITEM,
   CREATE_EXAM_QUESTION,
   UPDATE_EXAM_QUESTION,
-  DELETE_EXAM_QUESTION
-} from './exam-config.graphql';
+  DELETE_EXAM_QUESTION,
+  SAVE_EXAM_RESULT
+} from './exam.graphql';
+import { ExamQuestionResultID, SaveExamResultRequest } from '@gql-models/exam/exam-result.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ExamConfigService {
+export class ExamService {
   constructor(private apolloService: ApolloService) {}
 
   queryExamQuestionList(): Observable<ExamQuestionBankInfo[]> {
@@ -37,7 +39,7 @@ export class ExamConfigService {
       );
   }
 
-  queryExamQuestionItem(req: GetExamQuestionItemRequest): Observable<ExamQuestionBankInfo> {
+  queryExamQuestionItem(req: GetExamQuestionItemRequest): Promise<ExamQuestionBankInfo> {
     return this.apolloService
       .getApollo()
       .query<{ GetExamQuestionItem: ExamQuestionBankInfo }>({
@@ -46,8 +48,9 @@ export class ExamConfigService {
       })
       .pipe(
         map(({ data }) => data.GetExamQuestionItem),
-        catchError(() => of(null))
-      );
+        catchError(err => throwError(err))
+      )
+      .toPromise();
   }
 
   createExamQuestion(req: CreateExamQuestionRequest): Observable<ExamQuestionID> {
@@ -87,5 +90,16 @@ export class ExamConfigService {
         map(({ data }) => data.DeleteExamQuestion),
         catchError(() => of(null))
       );
+  }
+
+  saveExamResult(req: SaveExamResultRequest): Promise<ExamQuestionResultID> {
+    return this.apolloService
+      .getApollo()
+      .mutate<{ SaveExamQuestionResult: ExamQuestionResultID }>({
+        mutation: SAVE_EXAM_RESULT,
+        variables: { req }
+      })
+      .pipe(map(({ data }) => data.SaveExamQuestionResult))
+      .toPromise();
   }
 }

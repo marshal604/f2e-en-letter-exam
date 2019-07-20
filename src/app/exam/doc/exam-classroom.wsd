@@ -1,0 +1,25 @@
+' exam classroom execute process
+@startuml
+Actor User
+ExamClassroom -> Backend: query question bank item by id
+alt if query success
+  Backend -> ExamClassroom: return response
+  ExamClassroom -> User: show exam question
+  User -> ExamClassroomSubmitBtn: alert dialog: "Please click confirm if you sure to submit."
+  alt if click confirm
+    ExamClassroom -> Backend: update data to question result table.
+    alt if update success
+      ExamClassroom -> User: alert dialog: "Submit success."
+      ExamClassroom -> ExamHomePage: redirect to home page
+    else if update failed
+      ExamClassroom -> ExamClassroom: back to exam question page and do nothing;
+    end
+  else if click cancel
+    ExamClassroom -> ExamClassroom: back to exam question page and do nothing;
+  end
+else if query failed
+  Backend -> ExamClassroom: throw error
+  ExamClassroom -> User: alert dialog: "Exam ID is invalid or permission denied."
+  ExamClassroom -> ExamHomePage: redirect to home page
+end
+@enduml
