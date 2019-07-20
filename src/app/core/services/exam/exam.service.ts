@@ -16,8 +16,10 @@ import {
   QUERY_EXAM_QUESTION_ITEM,
   CREATE_EXAM_QUESTION,
   UPDATE_EXAM_QUESTION,
-  DELETE_EXAM_QUESTION
+  DELETE_EXAM_QUESTION,
+  SAVE_EXAM_RESULT
 } from './exam.graphql';
+import { ExamQuestionResultID, SaveExamResultRequest } from '@gql-models/exam/exam-result.model';
 
 @Injectable({
   providedIn: 'root'
@@ -88,5 +90,16 @@ export class ExamService {
         map(({ data }) => data.DeleteExamQuestion),
         catchError(() => of(null))
       );
+  }
+
+  saveExamResult(req: SaveExamResultRequest): Promise<ExamQuestionResultID> {
+    return this.apolloService
+      .getApollo()
+      .mutate<{ SaveExamQuestionResult: ExamQuestionResultID }>({
+        mutation: SAVE_EXAM_RESULT,
+        variables: { req }
+      })
+      .pipe(map(({ data }) => data.SaveExamQuestionResult))
+      .toPromise();
   }
 }

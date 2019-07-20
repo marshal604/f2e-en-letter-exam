@@ -18,8 +18,8 @@
       <button mat-raised-button *ngIf="optionIndex > 0" matStepperPrevious>Prev</button>
       <button mat-raised-button *ngIf="optionIndex !== questionList.length - 1"
         [disabled]="formGroup.get('radio-'+optionIndex).invalid" matStepperNext>Next</button>
-      <button mat-raised-button *ngIf="optionIndex === questionList.length - 1" [disabled]="formGroup.invalid"
-        (click)="onSubmit()">Submit</button>
+      <button mat-raised-button *ngIf="optionIndex === questionList.length - 1"
+        [disabled]="formGroup.invalid || isDisabledSubmit" (click)="onSubmit()">Submit</button>
     </div>
   </mat-step>
 </mat-horizontal-stepper>

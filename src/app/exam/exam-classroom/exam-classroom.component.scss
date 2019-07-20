@@ -41,6 +41,8 @@
 .buttons {
     display: flex;
     justify-content: space-between;
+    max-width: 450px;
+    margin: auto;
 
     &.one-btn {
         justify-content: flex-end;

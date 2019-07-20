@@ -63,3 +63,11 @@ export const DELETE_EXAM_QUESTION = gql`
     }
   }
 `;
+
+export const SAVE_EXAM_RESULT = gql`
+  mutation SaveExamQuestionResult($req: SaveExamResultRequest) {
+    SaveExamQuestionResult(req: $req) {
+      id
+    }
+  }
+`;

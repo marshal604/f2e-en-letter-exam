@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
@@ -8,7 +8,8 @@ import {
   ExamQuestionBankInfo,
   ExamClassroomQuestionItem,
   QuestionType,
-  ExamQuestion
+  ExamQuestion,
+  SaveExamResultRequest
 } from '@exam/exam.model';
 @Component({
   selector: 'yur-exam-classroom',
@@ -19,12 +20,14 @@ export class ExamClassroomComponent implements OnInit, OnDestroy {
   selectedIndex = 0;
   questionList: ExamClassroomQuestionItem[];
   formGroup: FormGroup;
-  // questionBank: string[];
+  questionBackInfo: ExamQuestionBankInfo;
+  isDisabledSubmit: boolean;
   private subscriptions = new Subscription();
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private examService: ExamService,
+    private router: Router,
     private fb: FormBuilder
   ) {
     this.activatedRoute.params.subscribe(data => {
@@ -32,6 +35,7 @@ export class ExamClassroomComponent implements OnInit, OnDestroy {
         .queryExamQuestionItem({ id: data.id })
         .then(
           q => {
+            this.questionBackInfo = q;
             const questionList = this.parseExamQuestion(q);
             this.updateFormGroup(questionList.length);
             this.questionList = questionList;
@@ -55,8 +59,39 @@ export class ExamClassroomComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    const selectedList = Object.keys(this.formGroup.value).map(key => this.formGroup.value[key]);
-    alert('送出完畢');
+    this.isDisabledSubmit = true;
+    const selectedList = this.getSelectedQuestionList();
+    const examScore = this.calExamScore(selectedList);
+    const req: SaveExamResultRequest = {
+      examId: this.questionBackInfo.id,
+      userId: 'test',
+      examName: this.questionBackInfo.name,
+      userName: 'test',
+      result: this.questionList.map((item, index) => {
+        return {
+          numberOfQuestion: index + 1,
+          choose: {
+            name: item.questions[selectedList[index]]
+          },
+          answer: {
+            name: item.questions[item.answer]
+          },
+          isCorrect: item.answer === selectedList[index]
+        };
+      }),
+      examScore,
+      isCompleted: true
+    };
+    this.examService
+      .saveExamResult(req)
+      .then(() => {
+        alert('送出完畢');
+        this.router.navigate(['../../home'], { relativeTo: this.activatedRoute });
+      })
+      .catch(() => {
+        alert('網路不穩，請重新送出');
+        this.isDisabledSubmit = false;
+      });
   }
 
   private initFormGroup() {
@@ -140,5 +175,18 @@ export class ExamClassroomComponent implements OnInit, OnDestroy {
       questions.push(questionBank[key]);
     });
     return questions;
+  }
+
+  private getSelectedQuestionList(): number[] {
+    return Object.keys(this.formGroup.value).map(key => this.formGroup.value[key]);
+  }
+  private calExamScore(selectedList: number[]): number {
+    const scorePerQuestion = 100 / selectedList.length;
+    const score = this.questionList.reduce((pre, cur, index) => {
+      const isCorrect = cur.answer === selectedList[index];
+      pre += isCorrect ? scorePerQuestion : 0;
+      return pre;
+    }, 0);
+    return Math.floor(score);
   }
 }
