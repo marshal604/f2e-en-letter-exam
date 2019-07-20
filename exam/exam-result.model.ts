@@ -1,5 +1,4 @@
 export interface SaveExamResultRequest {
-  id: string;
   examId: string;
   userId: string;
   examName: string;
@@ -7,6 +6,7 @@ export interface SaveExamResultRequest {
   result: SaveExamResultContent[];
   examScore: number;
   isCompeleted: boolean;
+  id?: string;
   examTime?: string;
 }
 
