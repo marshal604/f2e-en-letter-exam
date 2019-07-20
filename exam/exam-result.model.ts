@@ -5,7 +5,7 @@ export interface SaveExamResultRequest {
   userName: string;
   result: SaveExamResultContent[];
   examScore: number;
-  isCompeleted: boolean;
+  isCompleted: boolean;
   id?: string;
   examTime?: string;
 }
