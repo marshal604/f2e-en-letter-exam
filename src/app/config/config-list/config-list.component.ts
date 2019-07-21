@@ -27,7 +27,7 @@ export class ConfigListComponent implements OnInit {
         name: '新增題庫'
       },
       {
-        id: 'exam/manage',
+        id: 'manage',
         name: '管理題庫'
       }
     ];
