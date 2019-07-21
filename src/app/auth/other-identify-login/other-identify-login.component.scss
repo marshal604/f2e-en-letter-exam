@@ -1,0 +1,17 @@
+@import 'variable';
+
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin: $m-12 auto 0 auto;
+    max-width: 450px;
+    min-width: 300px;
+}

@@ -1,3 +1,14 @@
-<p>
-  other-identify-login works!
-</p>
+<ng-container [formGroup]="loginForm">
+  <mat-form-field>
+    <input matInput formControlName="account" placeholder="Account">
+    <mat-error *ngIf="loginForm.get('account').invalid">請填寫帳號</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input type="password" matInput formControlName="password" (keyup)="onEnter($event)" placeholder="Password">
+    <mat-error *ngIf="loginForm.get('password').invalid">請填寫密碼</mat-error>
+  </mat-form-field>
+  <div class="buttons">
+    <button [disabled]="loginForm.invalid || isDisabledLogin" class="login-btn" mat-raised-button
+      (click)="onLogin()">Login</button>
+  </div>
+</ng-container>
