@@ -23,6 +23,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.userService.getUserInfo()) {
+      this.router.navigate(['exam']);
+    }
     this.initIdentifyList();
     this.initFBOauthAPI();
   }
