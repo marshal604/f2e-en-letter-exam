@@ -11,6 +11,7 @@ import {
   ExamQuestion,
   SaveExamResultRequest
 } from '@exam/exam.model';
+import { UserService } from '@core/services/user.service';
 @Component({
   selector: 'yur-exam-classroom',
   templateUrl: './exam-classroom.component.html',
@@ -27,6 +28,7 @@ export class ExamClassroomComponent implements OnInit, OnDestroy {
   constructor(
     private activatedRoute: ActivatedRoute,
     private examService: ExamService,
+    private userService: UserService,
     private router: Router,
     private fb: FormBuilder
   ) {
@@ -62,11 +64,12 @@ export class ExamClassroomComponent implements OnInit, OnDestroy {
     this.isDisabledSubmit = true;
     const selectedList = this.getSelectedQuestionList();
     const examScore = this.calExamScore(selectedList);
+    const { userId, name } = this.userService.getUserInfo();
     const req: SaveExamResultRequest = {
       examId: this.questionBackInfo.id,
-      userId: 'test',
+      userId,
       examName: this.questionBackInfo.name,
-      userName: 'test',
+      userName: name,
       result: this.questionList.map((item, index) => {
         return {
           numberOfQuestion: index + 1,
