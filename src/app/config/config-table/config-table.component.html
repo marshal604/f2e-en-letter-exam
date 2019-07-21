@@ -10,7 +10,7 @@
     </ng-container>
     <ng-template #otherRow>
       <mat-header-cell *matHeaderCellDef mat-sort-header> {{headersMap.get(header)}} </mat-header-cell>
-      <mat-cell *matCellDef="let row"> {{row}} </mat-cell>
+      <mat-cell *matCellDef="let row"> {{parseRowWordingFn(row, header)}} </mat-cell>
     </ng-template>
   </ng-container>
 

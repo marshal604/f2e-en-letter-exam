@@ -1,21 +1,20 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 
-import { ExamQuestionResultItem } from '@gql-models/exam/exam-result.model';
-
 @Component({
   selector: 'yur-config-table',
   templateUrl: './config-table.component.html',
   styleUrls: ['./config-table.component.scss']
 })
 export class ConfigTableComponent implements OnInit, OnChanges {
-  @Input() data: ExamQuestionResultItem[];
+  @Input() data: any[];
   @Input() headers: string[];
   @Input() headersMap: Map<string, string>;
   @Input() isUseNumber: boolean;
+  @Input() parseRowWordingFn: (row: any, header: string) => string | number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  dataSource: MatTableDataSource<ExamQuestionResultItem>;
+  dataSource: MatTableDataSource<any>;
   constructor() {}
 
   ngOnInit() {
