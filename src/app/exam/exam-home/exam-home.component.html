@@ -1,16 +1,17 @@
 <div class="exam-home-container">
-  <div class="config-buttons">
-    <button mat-raised-button color="primary" (click)="onGoConfigPage()">設定</button>
-    <button mat-raised-button color="primary">排行榜</button>
+  <div class="config-buttons" [class.user-mode]="!hasPermission()">
+    <button *ngIf="hasPermission()" class="config-setting" mat-raised-button color="primary"
+      (click)="onGoConfigPage()">設定</button>
+    <button class="config-leadboard" mat-raised-button color="primary">排行榜</button>
   </div>
   <div class="exam-option">
     <mat-form-field>
       <mat-select [formControl]="examFormControl" placeholder="選擇要作答的題庫">
-        <mat-option [value]="option.id" *ngFor="let option of examQuestionOptions">{{option.name}}</mat-option>
+        <mat-option [value]="option.id" *ngFor="let option of examQuestionOptions">
+          {{option.name}}
+        </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="exam-button">
-    <button mat-raised-button color="primary" (click)="onStartExam()">開始作答</button>
-  </div>
+  <div class="exam-button"><button mat-raised-button color="primary" (click)="onStartExam()">開始作答</button></div>
 </div>
