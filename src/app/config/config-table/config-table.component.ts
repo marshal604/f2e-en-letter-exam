@@ -12,6 +12,7 @@ export class ConfigTableComponent implements OnInit, OnChanges {
   @Input() data: ExamQuestionResultItem[];
   @Input() headers: string[];
   @Input() headersMap: Map<string, string | number>;
+  @Input() isUseNumber: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<ExamQuestionResultItem>;

@@ -3,9 +3,15 @@
 </mat-form-field>
 <mat-paginator [pageSizeOptions]="[10, 20, 30, 100]"></mat-paginator>
 <mat-table [dataSource]="dataSource" matSort>
-  <ng-container matColumnDef="header" *ngFor="let header of headers">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> {{headersMap.get(header)}} </mat-header-cell>
-    <mat-cell *matCellDef="let row"> {{row}} </mat-cell>
+  <ng-container matColumnDef="header" *ngFor="let header of headers; let currentIndex = index">
+    <ng-container *ngIf="isUseNumber && header === 'no'; else otherRow">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{currentIndex + 1}} </mat-cell>
+    </ng-container>
+    <ng-template #otherRow>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{headersMap.get(header)}} </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row}} </mat-cell>
+    </ng-template>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="headers"></mat-header-row>
