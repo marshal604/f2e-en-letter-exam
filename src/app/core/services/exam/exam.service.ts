@@ -33,7 +33,7 @@ import {
 export class ExamService {
   constructor(private apolloService: ApolloService) {}
 
-  queryExamQuestionList(): Observable<ExamQuestionBankInfo[]> {
+  queryExamQuestionList(): Promise<ExamQuestionBankInfo[]> {
     return this.apolloService
       .getApollo()
       .query<{ GetExamQuestionList: ExamQuestionBankInfo[] }>({
@@ -42,7 +42,8 @@ export class ExamService {
       .pipe(
         map(({ data }) => data.GetExamQuestionList || []),
         catchError(() => of([]))
-      );
+      )
+      .toPromise();
   }
 
   queryExamQuestionItem(req: GetExamQuestionItemRequest): Promise<ExamQuestionBankInfo> {
