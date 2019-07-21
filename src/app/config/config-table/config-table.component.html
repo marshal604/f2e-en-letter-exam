@@ -1,3 +1,13 @@
-<p>
-  config-table works!
-</p>
+<mat-form-field>
+  <input matInput (keyup)="onFilterTable($event.target.value)" placeholder="Filter">
+</mat-form-field>
+<mat-paginator [pageSizeOptions]="[10, 20, 30, 100]"></mat-paginator>
+<mat-table [dataSource]="dataSource" matSort>
+  <ng-container matColumnDef="header" *ngFor="let header of headers">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> {{headersMap.get(header)}} </mat-header-cell>
+    <mat-cell *matCellDef="let row"> {{row}} </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="headers"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: headers;"></mat-row>
+</mat-table>
