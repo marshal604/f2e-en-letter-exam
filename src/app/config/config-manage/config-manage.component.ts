@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ExamQuestionBankInfo } from '@exam/exam.model';
+import { ExamQuestionBankInfo, QuestionType } from '@exam/exam.model';
 import { ExamService } from '@core/services/exam/exam.service';
 
 @Component({
@@ -18,6 +18,23 @@ export class ConfigManageComponent implements OnInit {
     this.initExamQuestionBankList();
     this.initQuestionHeaders();
     this.initQuestionHeadersMap();
+  }
+
+  parseRowWordingFn(row: ExamQuestionBankInfo, header: string): string | number {
+    let result: string | number;
+    switch (header) {
+      case 'examQuestionType':
+        const typeMap = new Map<QuestionType, string>([
+          [QuestionType.ChineseToEnglish, '中翻英'],
+          [QuestionType.EnglishToChinese, '英翻中']
+        ]);
+        result = typeMap.get(row[header]);
+        break;
+      default:
+        result = row[header];
+        break;
+    }
+    return result;
   }
 
   private initExamQuestionBankList() {
