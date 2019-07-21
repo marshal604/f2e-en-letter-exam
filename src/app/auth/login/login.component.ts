@@ -23,6 +23,9 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (this.userService.getUserInfo()) {
+      this.router.navigate(['exam']);
+    }
     this.initIdentifyList();
     this.initFBOauthAPI();
   }
@@ -110,7 +113,10 @@ export class LoginComponent implements OnInit {
               })
               .toPromise()
           )
-          .then((userInfo: UserInfo) => this.userService.setUserInfo(userInfo))
+          .then((userInfo: UserInfo) => {
+            this.userService.setUserInfo(userInfo);
+            this.router.navigate(['exam']);
+          })
           .catch((err: Error) => console.log(err.message));
         break;
       case LoginIdentify.Google:
