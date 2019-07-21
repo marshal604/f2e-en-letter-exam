@@ -25,3 +25,20 @@ export interface ExamResult {
 export interface ExamQuestionResultID {
   id: string;
 }
+
+export interface GetExamQuestionResultListRequest {
+  examId?: string;
+  userId?: string;
+}
+
+export interface ExamQuestionResultItem {
+  id: string;
+  examId: string;
+  userId: string;
+  examName: string;
+  userName: string;
+  result: SaveExamResultContent[];
+  examScore: number;
+  isCompleted: boolean;
+  examTime: string;
+}
