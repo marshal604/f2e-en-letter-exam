@@ -11,7 +11,7 @@ import { ExamService } from '@core/services/exam/exam.service';
 export class ConfigManageComponent implements OnInit {
   examQuestionBankList: ExamQuestionBankInfo[] = [];
   examQuestionHeaders: string[];
-  examQuestionHeadersMap: Map<string, string | number>;
+  examQuestionHeadersMap: Map<string, string>;
   constructor(private examService: ExamService) {}
 
   ngOnInit() {

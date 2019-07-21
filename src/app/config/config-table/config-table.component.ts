@@ -11,7 +11,7 @@ import { ExamQuestionResultItem } from '@gql-models/exam/exam-result.model';
 export class ConfigTableComponent implements OnInit, OnChanges {
   @Input() data: ExamQuestionResultItem[];
   @Input() headers: string[];
-  @Input() headersMap: Map<string, string | number>;
+  @Input() headersMap: Map<string, string>;
   @Input() isUseNumber: boolean;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
