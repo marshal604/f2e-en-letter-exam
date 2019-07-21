@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { AES } from 'crypto-js';
+import { HmacSHA1 } from 'crypto-js';
 
 import { ApolloService } from '@core/services/apollo.service';
 import { QUERY_LOGIN_WITH_OAUTH, QUERY_LOGIN } from './auth.graphql';
@@ -18,16 +18,12 @@ export class AuthService {
   identifyWithFb() {}
 
   encrypt(text: string): string {
-    const encrypt = AES.encrypt(text, this.secretKey);
+    const encrypt = HmacSHA1(text, this.secretKey);
     return encrypt.toString();
   }
 
-  decrypt(text: string): string {
-    const decrypt = AES.decrypt(text, this.secretKey);
-    return decrypt.toString();
-  }
-
-  doLogin(req: LoginRequest): Observable<UserInfo> {
+  doLogin(req: LoginRequest): Promise<UserInfo> {
+    req.password = this.encrypt(req.password);
     return this.apolloService
       .getApollo()
       .query<{ Login: UserInfo }>({
@@ -36,7 +32,8 @@ export class AuthService {
           req
         }
       })
-      .pipe(map(({ data }) => data.Login));
+      .pipe(map(({ data }) => data.Login))
+      .toPromise();
   }
 
   doLoginWithOAuth(req: LoginOAuthRequest): Observable<UserInfo> {

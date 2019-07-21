@@ -117,7 +117,10 @@ export class LoginComponent implements OnInit {
             this.userService.setUserInfo(userInfo);
             this.router.navigate(['exam']);
           })
-          .catch((err: Error) => console.log(err.message));
+          .catch((err: Error) => {
+            alert('帳號密碼錯誤');
+            console.log(err.message);
+          });
         break;
       case LoginIdentify.Google:
         break;

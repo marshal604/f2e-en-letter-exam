@@ -6,6 +6,8 @@ import { tap } from 'rxjs/operators';
 import { ExamService } from '@core/services/exam/exam.service';
 import { ExamQuestionBankInfo } from '@exam/exam.model';
 import { FormControl } from '@angular/forms';
+import { UserService } from '@core/services/user.service';
+import { UserRole } from '@gql-models/auth/auth.model';
 @Component({
   selector: 'yur-exam-home',
   templateUrl: './exam-home.component.html',
@@ -16,7 +18,11 @@ export class ExamHomeComponent implements OnInit, OnDestroy {
   examFormControl = new FormControl();
 
   private subscriptions = new Subscription();
-  constructor(private router: Router, private examService: ExamService) {}
+  constructor(
+    private router: Router,
+    private examService: ExamService,
+    private userService: UserService
+  ) {}
 
   ngOnInit() {
     this.queryExamQuestionList().toPromise();
@@ -32,6 +38,10 @@ export class ExamHomeComponent implements OnInit, OnDestroy {
 
   onStartExam() {
     this.router.navigate([`exam/classroom/${this.examFormControl.value}`]);
+  }
+
+  hasPermission(): boolean {
+    return this.userService.getUserInfo().role <= UserRole.Administrator;
   }
 
   private queryExamQuestionList(): Observable<ExamQuestionBankInfo[]> {

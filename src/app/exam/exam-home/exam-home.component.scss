@@ -21,6 +21,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  &.user-mode {
+    justify-content: flex-end;
+  }
 }
 
 .exam-option {
