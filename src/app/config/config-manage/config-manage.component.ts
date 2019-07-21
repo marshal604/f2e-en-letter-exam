@@ -6,7 +6,7 @@ import { ExamService } from '@core/services/exam/exam.service';
 @Component({
   selector: 'yur-config-manage',
   templateUrl: './config-manage.component.html',
-  styleUrls: ['./config-manage.component.css']
+  styleUrls: ['./config-manage.component.scss']
 })
 export class ConfigManageComponent implements OnInit {
   examQuestionBankList: ExamQuestionBankInfo[] = [];
