@@ -23,6 +23,7 @@ export class AuthGuardService implements CanActivate {
   ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     const userInfo = this.userService.getUserInfo();
     if (!userInfo) {
+      this.router.navigate(['/auth']);
       return false;
     }
 
@@ -30,6 +31,7 @@ export class AuthGuardService implements CanActivate {
       this.permissionPath.includes(route.routeConfig.path) &&
       userInfo.role > UserRole.Administrator
     ) {
+      this.router.navigate(['/auth']);
       return false;
     }
 
