@@ -1,0 +1,20 @@
+@import 'variable';
+
+.yur-config-table {
+    height: 100%;
+    padding: $p-8;
+    box-sizing: border-box;
+}
+
+::ng-deep {
+    yur-config-table {
+        .mat-column-detail {
+            cursor: pointer;
+            transition: color 0.5s;
+
+            &:hover {
+                color: lightblue;
+            }
+        }
+    }
+}

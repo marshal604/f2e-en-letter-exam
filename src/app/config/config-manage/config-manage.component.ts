@@ -21,21 +21,43 @@ export class ConfigManageComponent implements OnInit {
   }
 
   parseRowWordingFn(row: ExamQuestionBankInfo, header: string): string | number {
+    if (!row) {
+      return '-';
+    }
     let result: string | number;
     switch (header) {
+      case 'examTime':
+      case 'examPassScore':
+      case 'examAllowCount':
+        result = row.setting[header] === 0 ? '不限' : row.setting[header];
+        break;
+      case 'name':
+        result = row[header];
+        break;
       case 'examQuestionType':
         const typeMap = new Map<QuestionType, string>([
           [QuestionType.ChineseToEnglish, '中翻英'],
           [QuestionType.EnglishToChinese, '英翻中']
         ]);
-        result = typeMap.get(row[header]);
+        result = typeMap.get(row.setting[header]);
+        break;
+      case 'detail':
+        result = 'GO!';
         break;
       default:
-        result = row[header];
+        result = row.setting[header];
         break;
     }
     return result;
   }
+
+  onRowClicked({ row, header }: { row: ExamQuestionBankInfo; header: string }) {
+    if (header === 'detail') {
+      this.navigateTo(row.id);
+    }
+  }
+
+  private navigateTo(id: string) {}
 
   private initExamQuestionBankList() {
     this.examService.queryExamQuestionList().then(data => {
@@ -51,7 +73,8 @@ export class ConfigManageComponent implements OnInit {
       'examQuestionDisplayCount',
       'examQuestionType',
       'examPassScore',
-      'examAllowCount'
+      'examAllowCount',
+      'detail'
     ];
   }
   private initQuestionHeadersMap() {
@@ -62,7 +85,8 @@ export class ConfigManageComponent implements OnInit {
       ['examQuestionDisplayCount', '每題題數'],
       ['examQuestionType', '考題模式'],
       ['examPassScore', '及格分數'],
-      ['examAllowCount', '考試上限次數']
+      ['examAllowCount', '考試上限次數'],
+      ['detail', '考試結果']
     ]);
   }
 }
