@@ -1,3 +1,17 @@
-.mat-form-field {
-  width: 100%;
+@import 'variable';
+:host {
+  display: flex;
+  flex-direction: column;
+}
+.table-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .table-filter {
+        margin-left: $m-16;
+    }
+}
+.mat-table {
+  flex: 1;
 }

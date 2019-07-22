@@ -1,6 +1,14 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-
 @Component({
   selector: 'yur-config-table',
   templateUrl: './config-table.component.html',
@@ -10,8 +18,11 @@ export class ConfigTableComponent implements OnInit, OnChanges {
   @Input() data: any[];
   @Input() headers: string[];
   @Input() headersMap: Map<string, string>;
-  @Input() isUseNumber: boolean;
   @Input() parseRowWordingFn: (row: any, header: string) => string | number;
+  @Output() clickRow = new EventEmitter<{
+    row: any;
+    header: string;
+  }>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   dataSource: MatTableDataSource<any>;
