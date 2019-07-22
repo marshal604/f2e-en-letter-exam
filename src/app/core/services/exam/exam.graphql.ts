@@ -71,3 +71,26 @@ export const SAVE_EXAM_RESULT = gql`
     }
   }
 `;
+
+export const QUERY_EXAM_QUESTION_RESULT_LIST = gql`
+  query($req: GetExamQuestionResultListRequest) {
+    GetExamQuestionResultList(req: $req) {
+      id
+      examId
+      examName
+      userId
+      userName
+      result {
+        choose {
+          name
+        }
+        answer {
+          name
+        }
+      }
+      examScore
+      isCompleted
+      examTime
+    }
+  }
+`;

@@ -17,9 +17,15 @@ import {
   CREATE_EXAM_QUESTION,
   UPDATE_EXAM_QUESTION,
   DELETE_EXAM_QUESTION,
-  SAVE_EXAM_RESULT
+  SAVE_EXAM_RESULT,
+  QUERY_EXAM_QUESTION_RESULT_LIST
 } from './exam.graphql';
-import { ExamQuestionResultID, SaveExamResultRequest } from '@gql-models/exam/exam-result.model';
+import {
+  ExamQuestionResultID,
+  SaveExamResultRequest,
+  GetExamQuestionResultListRequest,
+  ExamQuestionResultItem
+} from '@gql-models/exam/exam-result.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +33,7 @@ import { ExamQuestionResultID, SaveExamResultRequest } from '@gql-models/exam/ex
 export class ExamService {
   constructor(private apolloService: ApolloService) {}
 
-  queryExamQuestionList(): Observable<ExamQuestionBankInfo[]> {
+  queryExamQuestionList(): Promise<ExamQuestionBankInfo[]> {
     return this.apolloService
       .getApollo()
       .query<{ GetExamQuestionList: ExamQuestionBankInfo[] }>({
@@ -36,7 +42,8 @@ export class ExamService {
       .pipe(
         map(({ data }) => data.GetExamQuestionList || []),
         catchError(() => of([]))
-      );
+      )
+      .toPromise();
   }
 
   queryExamQuestionItem(req: GetExamQuestionItemRequest): Promise<ExamQuestionBankInfo> {
@@ -100,6 +107,20 @@ export class ExamService {
         variables: { req }
       })
       .pipe(map(({ data }) => data.SaveExamQuestionResult))
+      .toPromise();
+  }
+
+  getExamResultList(req: GetExamQuestionResultListRequest): Promise<ExamQuestionResultItem[]> {
+    return this.apolloService
+      .getApollo()
+      .query<{ GetExamQuestionResultList: ExamQuestionResultItem[] }>({
+        query: QUERY_EXAM_QUESTION_RESULT_LIST,
+        variables: { req }
+      })
+      .pipe(
+        map(({ data }) => data.GetExamQuestionResultList),
+        catchError(() => of([]))
+      )
       .toPromise();
   }
 }

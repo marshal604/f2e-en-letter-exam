@@ -25,7 +25,7 @@ export class ExamHomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.queryExamQuestionList().toPromise();
+    this.initExamQuestionOptions();
   }
 
   ngOnDestroy() {
@@ -44,12 +44,10 @@ export class ExamHomeComponent implements OnInit, OnDestroy {
     return this.userService.getUserInfo().role <= UserRole.Administrator;
   }
 
-  private queryExamQuestionList(): Observable<ExamQuestionBankInfo[]> {
-    return this.examService.queryExamQuestionList().pipe(
-      tap(data => {
-        this.examQuestionOptions = data;
-        this.examFormControl.setValue(data.length > 0 ? data[0].id : '');
-      })
-    );
+  private initExamQuestionOptions() {
+    this.examService.queryExamQuestionList().then(data => {
+      this.examQuestionOptions = data;
+      this.examFormControl.setValue(data.length > 0 ? data[0].id : '');
+    });
   }
 }

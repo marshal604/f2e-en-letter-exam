@@ -1,0 +1,21 @@
+<div class="table-toolbar">
+  <mat-form-field class="table-filter">
+    <input matInput (keyup)="onFilterTable($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30, 100]"></mat-paginator>
+</div>
+<mat-table [dataSource]="dataSource" matSort>
+  <ng-container [matColumnDef]="header" *ngFor="let header of headers">
+    <ng-container *ngIf="header === 'no'; else otherRow">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> No. </mat-header-cell>
+      <mat-cell *matCellDef="let row; let rowIndex = index"> {{rowIndex + 1}} </mat-cell>
+    </ng-container>
+    <ng-template #otherRow>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> {{headersMap.get(header)}} </mat-header-cell>
+      <mat-cell *matCellDef="let row" (click)="clickRow.emit({ row: row, header: header })">
+        {{parseRowWordingFn(row, header)}} </mat-cell>
+    </ng-template>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="headers"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: headers;"></mat-row>
+</mat-table>
