@@ -4,6 +4,11 @@ import { AuthGuardService } from '@auth/auth-guard.service';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'auth',
+    pathMatch: 'full'
+  },
+  {
     path: 'exam',
     loadChildren: '@exam/exam.module.ts#ExamModule',
     canActivate: [AuthGuardService]
@@ -12,6 +17,14 @@ const routes: Routes = [
     path: 'config',
     loadChildren: '@config/config.module.ts#ConfigModule',
     canActivate: [AuthGuardService]
+  },
+  {
+    path: 'auth',
+    loadChildren: '@auth/auth.module.ts#AuthModule'
+  },
+  {
+    path: '**',
+    redirectTo: 'auth'
   }
 ];
 @NgModule({
